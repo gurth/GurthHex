@@ -350,5 +350,4 @@ MigrationBackup/
 .ionide/
 
 # Directory
-/Gurth_Editor/debug
-/Gurth_Editor/build/build*
+/build/build*
