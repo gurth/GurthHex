@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1346</width>
+    <height>685</height>
+   </rect>
+  </property>
+  <property name="font">
+   <font>
+    <family>Consolas</family>
+    <pointsize>10</pointsize>
+   </font>
+  </property>
+  <property name="windowTitle">
+   <string>Gurth Editor</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">QMainWindow
+{
+Background:&quot;#262626&quot;;
+}
+
+QMenuBar{
+font-size: 11pt;
+color: rgb(225,225,225);
+background-color:#262626;
+}
+QMenuBar::item:selected{
+background-color:#7EC0EE;
+}
+QMenu {
+background-color:#262626; /*whole background*/
+border: 2px solid 	#009ACD;/*boder*/
+}
+QMenu::item {
+font-size: 11pt; 
+color: rgb(225,225,225);  /*font color*/
+border: 2px solid rgb(60,60,60);    /*item boder*/
+background-color:rgb(89,87,87);
+padding:2px 16px; 
+margin:1px 1px;
+width: 100px;
+}
+QMenu::item:selected { 
+background-color:#7EC0EE;
+}
+QMenu::item:pressed {
+    border: 1px solid rgb(60,60,61); 
+    background-color: rgb(220,80,6); 
+}</string>
+  </property>
+  <widget class="QWidget" name="centralWidget">
+   <layout class="QGridLayout" name="gridLayout">
+    <item row="0" column="0">
+     <widget class="QTextEdit" name="Buffer">
+      <property name="styleSheet">
+       <string notr="true">QTextEdit {
+color: rgb(225,225,225);
+background-color:#363636;
+border: 0.5px solid 	#9370DB;
+ }</string>
+      </property>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QMenuBar" name="menuBar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>1346</width>
+     <height>22</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menuFile">
+    <property name="title">
+     <string>File</string>
+    </property>
+    <addaction name="FileNew"/>
+    <addaction name="FileOpen"/>
+    <addaction name="FileSave"/>
+    <addaction name="FileSaveas"/>
+    <addaction name="FileExit"/>
+   </widget>
+   <widget class="QMenu" name="menuEdit">
+    <property name="title">
+     <string>Edit</string>
+    </property>
+    <addaction name="EditUndo"/>
+    <addaction name="EditFind"/>
+    <addaction name="EditReplease"/>
+    <addaction name="EditCopy"/>
+    <addaction name="EditCut"/>
+    <addaction name="EditPaste"/>
+    <addaction name="EditClear"/>
+    <addaction name="EditClearall"/>
+   </widget>
+   <widget class="QMenu" name="menuTool">
+    <property name="title">
+     <string>Tool</string>
+    </property>
+    <addaction name="ToolOption"/>
+   </widget>
+   <widget class="QMenu" name="menuHelp">
+    <property name="title">
+     <string>Help</string>
+    </property>
+    <addaction name="HelpAbout"/>
+   </widget>
+   <addaction name="menuFile"/>
+   <addaction name="menuEdit"/>
+   <addaction name="menuTool"/>
+   <addaction name="menuHelp"/>
+  </widget>
+  <widget class="QStatusBar" name="statusBar"/>
+  <action name="FileNew">
+   <property name="text">
+    <string>New</string>
+   </property>
+  </action>
+  <action name="FileOpen">
+   <property name="text">
+    <string>Open</string>
+   </property>
+  </action>
+  <action name="FileSave">
+   <property name="text">
+    <string>Save</string>
+   </property>
+  </action>
+  <action name="FileSaveas">
+   <property name="text">
+    <string>Save as ...</string>
+   </property>
+  </action>
+  <action name="FileExit">
+   <property name="text">
+    <string>Exit</string>
+   </property>
+  </action>
+  <action name="EditUndo">
+   <property name="text">
+    <string>Undo</string>
+   </property>
+  </action>
+  <action name="EditFind">
+   <property name="text">
+    <string>Find</string>
+   </property>
+  </action>
+  <action name="EditReplease">
+   <property name="text">
+    <string>Replease</string>
+   </property>
+  </action>
+  <action name="EditCopy">
+   <property name="text">
+    <string>Copy</string>
+   </property>
+  </action>
+  <action name="EditCut">
+   <property name="text">
+    <string>Cut</string>
+   </property>
+  </action>
+  <action name="EditPaste">
+   <property name="text">
+    <string>Paste</string>
+   </property>
+  </action>
+  <action name="EditClear">
+   <property name="text">
+    <string>Clear</string>
+   </property>
+  </action>
+  <action name="EditClearall">
+   <property name="text">
+    <string>Clear all</string>
+   </property>
+  </action>
+  <action name="ToolOption">
+   <property name="text">
+    <string>Option</string>
+   </property>
+  </action>
+  <action name="HelpAbout">
+   <property name="text">
+    <string>About</string>
+   </property>
+  </action>
+ </widget>
+ <layoutdefault spacing="6" margin="11"/>
+ <resources/>
+ <connections/>
+</ui>
