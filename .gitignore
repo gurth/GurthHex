@@ -351,3 +351,7 @@ MigrationBackup/
 
 # Directory
 /build/build*
+/build/vs/debug
+/build/vs/release
+/build/vs/.vs/GurthHex/v16/ipch
+/build/vs/.vs/GurthHex/v16/*.db
