@@ -51,8 +51,10 @@ void MainWindow::OninitEditor()
 {   
     editor = ui->Buffer;
     line=ui->line;
+    trans=ui->trans;
 
     line->setReadOnly(true);
+    trans->setReadOnly(true);
 
     highlighter = new Highlighter(editor->document());
 

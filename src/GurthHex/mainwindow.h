@@ -52,6 +52,7 @@ private:
     Highlighter *highlighter;
     QTextEdit *editor;
     QTextEdit *line;
+    QTextEdit *trans;
 
     DlgFind* dlgfind = new DlgFind;
     DlgReplace* dlgreplace = new DlgReplace;

@@ -7,7 +7,6 @@
 class HexProcess
 {
 protected:
-    char* p=nullptr;
     size64 size;
     size64 line;
 public:
