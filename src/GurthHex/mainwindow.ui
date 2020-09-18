@@ -13,7 +13,7 @@
   <property name="font">
    <font>
     <family>Consolas</family>
-    <pointsize>10</pointsize>
+    <pointsize>9</pointsize>
    </font>
   </property>
   <property name="windowTitle">
@@ -26,7 +26,6 @@ Background:&quot;#262626&quot;;
 }
 
 QMenuBar{
-font-size: 11pt;
 color: rgb(225,225,225);
 background-color:#262626;
 }
@@ -37,8 +36,7 @@ QMenu {
 background-color:#262626; /*whole background*/
 border: 2px solid 	#009ACD;/*boder*/
 }
-QMenu::item {
-font-size: 11pt; 
+QMenu::item { 
 color: rgb(225,225,225);  /*font color*/
 border: 2px solid rgb(60,60,60);    /*item boder*/
 background-color:rgb(89,87,87);
@@ -67,7 +65,7 @@ QMenu::item:pressed {
       <property name="font">
        <font>
         <family>Source Code Pro</family>
-        <pointsize>14</pointsize>
+        <pointsize>12</pointsize>
         <weight>75</weight>
         <bold>true</bold>
        </font>
@@ -100,7 +98,7 @@ background-color:#363636;
       <property name="font">
        <font>
         <family>Source Code Pro</family>
-        <pointsize>14</pointsize>
+        <pointsize>12</pointsize>
         <weight>75</weight>
         <bold>true</bold>
        </font>
@@ -119,7 +117,7 @@ border: 0.5px solid 	#9370DB;
       <property name="font">
        <font>
         <family>Source Code Pro</family>
-        <pointsize>14</pointsize>
+        <pointsize>12</pointsize>
         <weight>75</weight>
         <bold>true</bold>
        </font>
@@ -129,7 +127,7 @@ border: 0.5px solid 	#9370DB;
 background-color:#262626;</string>
       </property>
       <property name="text">
-       <string>   Offset:      00 01 02 03 04 05 06 07 08 09 0A 0B 0C 0D 0E 0F</string>
+       <string>   Offset:    00 01 02 03 04 05 06 07 08 09 0A 0B 0C 0D 0E 0F</string>
       </property>
      </widget>
     </item>
@@ -141,8 +139,13 @@ background-color:#262626;</string>
      <x>0</x>
      <y>0</y>
      <width>1346</width>
-     <height>22</height>
+     <height>28</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>9</pointsize>
+    </font>
    </property>
    <widget class="QMenu" name="menuFile">
     <property name="title">
