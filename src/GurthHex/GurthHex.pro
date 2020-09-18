@@ -27,8 +27,11 @@ CONFIG += c++11
 SOURCES += \
         datalist.cpp \
         dlgfind.cpp \
+        dlgoption.cpp \
         dlgreplace.cpp \
         fileprocess.cpp \
+        hexdown.cpp \
+        hexprocess.cpp \
         hexshow.cpp \
         highlighter.cpp \
         main.cpp \
@@ -38,14 +41,18 @@ SOURCES += \
 HEADERS += \
         datalist.h \
         dlgfind.h \
+        dlgoption.h \
         dlgreplace.h \
         fileprocess.h \
+        hexdown.h \
+        hexprocess.h \
         hexshow.h \
         highlighter.h \
         mainwindow.h
 
 FORMS += \
         dlgfind.ui \
+        dlgoption.ui \
         dlgreplace.ui \
         mainwindow.ui
 

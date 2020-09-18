@@ -8,9 +8,19 @@ MainWindow::MainWindow(QWidget *parent) :
 {
 
     ui->setupUi(this);
-    process.ArgProcessing();
     OninitMenu();
     OninitEditor();
+
+    if(!process.ArgProcessing())
+        QMessageBox::information(nullptr, "Error", "Arguments Processing failed.", QMessageBox::Yes);
+    else
+    {
+        if(process.fileloader())
+        {
+            HexShow hs;
+            hs.TransShow(*this);
+        }
+    }
 }
 
 MainWindow::~MainWindow()
@@ -39,19 +49,15 @@ void MainWindow::OninitMenu()
 
 void MainWindow::OninitEditor()
 {   
-    QFont font;
-    font.setFamily("Source Code Pro");
-    font.setFixedPitch(true);
-    font.setPointSize(12);
-
     editor = ui->Buffer;
-    editor->setFont(font);
+    line=ui->line;
+
+    line->setReadOnly(true);
 
     highlighter = new Highlighter(editor->document());
 
     connect(dlgfind, SIGNAL(sendfinddata(QString)), this, SLOT(receivefinddata(QString)));
     connect(dlgreplace, SIGNAL(sendreplacedata(QString,QString,bool)), this, SLOT(receivereplacedata(QString,QString,bool)));
-
 }
 
 

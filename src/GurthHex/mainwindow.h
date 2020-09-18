@@ -2,12 +2,13 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
-#include "datalist.h"
 #include "fileprocess.h"
 #include "highlighter.h"
 #include "dlgfind.h"
 #include "dlgreplace.h"
+#include "dlgoption.h"
 #include "hexshow.h"
+#include "hexdown.h"
 
 QT_BEGIN_NAMESPACE
 class QTextEdit;
@@ -50,14 +51,17 @@ private:
     Ui::MainWindow *ui;
     Highlighter *highlighter;
     QTextEdit *editor;
+    QTextEdit *line;
+
     DlgFind* dlgfind = new DlgFind;
     DlgReplace* dlgreplace = new DlgReplace;
-    int findpos = 0;
-    char* buff = nullptr;
+    DlgOption* dlgoption = new DlgOption;
+
 private:
     void OninitMenu();
     void OninitEditor();
-    friend bool HexShow::TransShow(char* buff);
+    friend bool HexShow::TransShow(const MainWindow& w);
+    friend bool HexDown::TransDown(const MainWindow& w);
 };
 
 #endif // MAINWINDOW_H

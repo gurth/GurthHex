@@ -56,14 +56,80 @@ QMenu::item:pressed {
   </property>
   <widget class="QWidget" name="centralWidget">
    <layout class="QGridLayout" name="gridLayout">
-    <item row="0" column="0">
+    <item row="5" column="0">
+     <widget class="QTextEdit" name="line">
+      <property name="maximumSize">
+       <size>
+        <width>160</width>
+        <height>16777215</height>
+       </size>
+      </property>
+      <property name="font">
+       <font>
+        <family>Source Code Pro</family>
+        <pointsize>14</pointsize>
+        <weight>75</weight>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="autoFillBackground">
+       <bool>false</bool>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QTextEdit {
+color: rgb(225,225,225);
+background-color:#363636;
+ }</string>
+      </property>
+     </widget>
+    </item>
+    <item row="5" column="1">
      <widget class="QTextEdit" name="Buffer">
+      <property name="maximumSize">
+       <size>
+        <width>16777215</width>
+        <height>16777215</height>
+       </size>
+      </property>
+      <property name="baseSize">
+       <size>
+        <width>0</width>
+        <height>0</height>
+       </size>
+      </property>
+      <property name="font">
+       <font>
+        <family>Source Code Pro</family>
+        <pointsize>14</pointsize>
+        <weight>75</weight>
+        <bold>true</bold>
+       </font>
+      </property>
       <property name="styleSheet">
        <string notr="true">QTextEdit {
 color: rgb(225,225,225);
 background-color:#363636;
 border: 0.5px solid 	#9370DB;
  }</string>
+      </property>
+     </widget>
+    </item>
+    <item row="0" column="0" colspan="2">
+     <widget class="QLabel" name="title">
+      <property name="font">
+       <font>
+        <family>Source Code Pro</family>
+        <pointsize>14</pointsize>
+        <weight>75</weight>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">color: rgb(225,225,225);
+background-color:#262626;</string>
+      </property>
+      <property name="text">
+       <string>   Offset:      00 01 02 03 04 05 06 07 08 09 0A 0B 0C 0D 0E 0F</string>
       </property>
      </widget>
     </item>

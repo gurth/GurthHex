@@ -1,10 +1,8 @@
 #include <QApplication>
-#include <QDebug>
 #include "datalist.h"
 
 Datalist::Datalist()
 {
-    RegExpPatList[0]=QRegExp("(\"-T\")|(\"--notranscode\")");
 }
 
 
@@ -14,15 +12,35 @@ Datalist::~Datalist()
 }
 
 
-void Datalist::ArgProcessing()
+bool Datalist::ArgProcessing()
 {
     QRegExp argrx("(\"-[a-zA-Z]\")|(\"--[a-zA-Z]*\")");
     QStringList arguments = QCoreApplication::arguments();
+    int n=0;
     if (arguments.count() < 2)
-        return;
-    for (int i = 0; i < arguments.size(); i++)
+        return true;
+    for (int i = 1; i < arguments.count(); i++)
     {
-        qDebug() << arguments.mid(i, 1) << endl;
+        if(argrx.exactMatch(arguments[i]))
+        {
+            if(!FunctionProcessing(arguments[i]))
+                return false;
+            continue;
+        }
+        if(!n)
+        {
+            FilePath=arguments[i];
+            n++;
+        }
+        else
+            return false;
     }
+    return true;
+}
 
+
+bool Datalist::FunctionProcessing(QString arg)
+{
+
+    return true;
 }

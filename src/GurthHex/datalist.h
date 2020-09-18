@@ -16,9 +16,9 @@ public:
     char* buff=nullptr;
     size64 size;
 public:
-    void ArgProcessing();
+    bool ArgProcessing();
 private:
-    QRegExp RegExpPatList[1];
+    bool FunctionProcessing(QString arg);
 };
 
 #endif // DATALIST_H
