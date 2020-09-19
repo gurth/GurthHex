@@ -11,7 +11,7 @@ public:
     HexDown();
     ~HexDown();
     bool TransDown();
-    bool TransDown(const MainWindow& w);
+    bool TransDown(MainWindow& w);
 };
 
 #endif // HEXDOWN_H

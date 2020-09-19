@@ -18,10 +18,11 @@ void MainWindow::OnClickFileOpen()
         QMessageBox::information(nullptr, "Error", "File opening failed.", QMessageBox::Yes);
     else
     {
+        DisconnectScrolls();
         HexShow hs;
         if(!hs.TransShow(*this))
             QMessageBox::information(nullptr, "Error", "File Show failed.", QMessageBox::Yes);
-
+        ConnectScrolls();
     }
 }
 

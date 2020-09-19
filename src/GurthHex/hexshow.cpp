@@ -3,6 +3,7 @@
 #include "mainwindow.h"
 #include <QtWidgets>
 #include <QString>
+#include <wctype.h>
 
 HexShow::HexShow()
 {
@@ -30,13 +31,13 @@ bool HexShow::TransShow(const MainWindow & w)
     {
         nowlinenum=QString::asprintf("0x%08x", now);
         w.line->append(nowlinenum);
-        now=now+=16;
+        now+=16;
         nowline.clear();
         nowtrans.clear();
         for(int j=0;j<16;j++)
         {
-            nowline.append(QString::asprintf(" %02x", *p));
-            nowtrans.append(QString::asprintf("%c", *p));
+            nowline.append(QString::asprintf(" %02x", (unsigned char)*p));
+            CheckTrans(*p, nowtrans);
             p++;
         }
         w.editor->append(nowline);
@@ -49,13 +50,40 @@ bool HexShow::TransShow(const MainWindow & w)
     nowtrans.clear();
     while (true)
     {
-        nowline.append(QString::asprintf(" %02x", *p));
-        nowtrans.append(QString::asprintf("%c", *p));
+        if(now>=size) break;
+        nowline.append(QString::asprintf(" %02x", (unsigned char)*p));
+        CheckTrans(*p, nowtrans);
         p++;
         now++;
-        if(now==size) break;
     }
     w.editor->append(nowline);
     w.trans->append(nowtrans);
     return true;
+}
+
+void HexShow::CheckTrans(char ch, QString &transline)
+{
+    /*
+    if(!iswcntrl(ch))
+    {
+        switch (ch)
+        {
+            case ' ':
+            case '\r':
+            case '\n':
+                transline.append(QString::asprintf(".", ch));
+                break;
+            default:
+                transline.append(QString::asprintf("%c", ch));
+                break;
+        }
+
+    }
+    else
+        transline.append(".");
+    */
+    if(ch>=32 && ch <= 126)
+        transline.append(QString::asprintf("%c", ch));
+    else
+        transline.append('.');
 }

@@ -9,7 +9,7 @@ class MainWindow;
 class HexShow : public HexProcess
 {
 private:
-
+    void CheckTrans(char ch, QString& transline);
 public:
     HexShow();
     ~HexShow();

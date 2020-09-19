@@ -44,3 +44,24 @@ bool Datalist::FunctionProcessing(QString arg)
 
     return true;
 }
+
+bool Datalist::RellocBuff(size64 size)
+{
+    free(buff);
+    this->size=size;
+    buff=(char*)malloc(size*sizeof(char));
+    if(buff)
+        return true;
+    else
+        return false;
+}
+
+bool Datalist::RellocBuffWithLine(size64 linenum)
+{
+    free(buff);
+    buff=(char*)malloc((linenum << 4)*sizeof(char));
+    if(buff)
+        return true;
+    else
+        return false;
+}

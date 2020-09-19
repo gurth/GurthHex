@@ -25,6 +25,9 @@ class MainWindow : public QMainWindow
 public:
     explicit MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
+    void ConnectScrolls();
+    void DisconnectScrolls();
+
 public slots:
     void OnClickFileNew();
     void OnClickFileOpen();
@@ -41,6 +44,8 @@ public slots:
     void OnClickEditClearall();
     void OnClickToolOption();
     void OnClickHelpAbout();
+
+    void OnEditorScrollMoved(int pos);
 
 private slots:
     void receivefinddata(QString finddata);
@@ -61,8 +66,9 @@ private:
 private:
     void OninitMenu();
     void OninitEditor();
+
     friend bool HexShow::TransShow(const MainWindow& w);
-    friend bool HexDown::TransDown(const MainWindow& w);
+    friend bool HexDown::TransDown(MainWindow& w);
 };
 
 #endif // MAINWINDOW_H

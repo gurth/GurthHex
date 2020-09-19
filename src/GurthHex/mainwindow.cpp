@@ -1,6 +1,7 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include <QtWidgets>
+#include <QScrollBar>
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -19,6 +20,7 @@ MainWindow::MainWindow(QWidget *parent) :
         {
             HexShow hs;
             hs.TransShow(*this);
+            ConnectScrolls();
         }
     }
 }
@@ -29,7 +31,7 @@ MainWindow::~MainWindow()
     delete dlgfind;
 }
 
-void MainWindow::OninitMenu()
+void inline MainWindow::OninitMenu()
 {
     connect(ui->FileNew,SIGNAL(triggered()),this,SLOT(OnClickFileNew()));
     connect(ui->FileOpen,SIGNAL(triggered()),this,SLOT(OnClickFileOpen()));
@@ -44,17 +46,19 @@ void MainWindow::OninitMenu()
     connect(ui->EditClearall,SIGNAL(triggered()),this,SLOT(OnClickEditClearall()));
     connect(ui->ToolOption,SIGNAL(triggered()),this,SLOT(OnClickToolOption()));
     connect(ui->HelpAbout,SIGNAL(triggered()),this,SLOT(OnClickHelpAbout()));
-
 }
 
-void MainWindow::OninitEditor()
+void inline MainWindow::OninitEditor()
 {   
     editor = ui->Buffer;
     line=ui->line;
     trans=ui->trans;
 
     line->setReadOnly(true);
+    line->verticalScrollBar()->hide();
+
     trans->setReadOnly(true);
+    trans->verticalScrollBar()->hide();
 
     highlighter = new Highlighter(editor->document());
 
@@ -121,4 +125,26 @@ void MainWindow::receivereplacedata(QString target, QString replacewith, bool is
             cursor.insertText(replacewith);
         }
     }
+}
+
+
+void MainWindow::ConnectScrolls()
+{
+    connect(editor->verticalScrollBar(),SIGNAL(valueChanged(int)),this,SLOT(OnEditorScrollMoved(int)));
+    connect(line->verticalScrollBar(),SIGNAL(valueChanged(int)),this,SLOT(OnEditorScrollMoved(int)));
+    connect(trans->verticalScrollBar(),SIGNAL(valueChanged(int)),this,SLOT(OnEditorScrollMoved(int)));
+}
+
+void MainWindow::DisconnectScrolls()
+{
+    disconnect(connect(editor->verticalScrollBar(),SIGNAL(valueChanged(int)),this,SLOT(OnEditorScrollMoved(int))));
+    disconnect(connect(line->verticalScrollBar(),SIGNAL(valueChanged(int)),this,SLOT(OnEditorScrollMoved(int))));
+    disconnect(connect(trans->verticalScrollBar(),SIGNAL(valueChanged(int)),this,SLOT(OnEditorScrollMoved(int))));
+}
+
+void MainWindow::OnEditorScrollMoved(int pos)
+{
+    editor->verticalScrollBar()->setValue(pos);
+    line->verticalScrollBar()->setValue(pos);
+    trans->verticalScrollBar()->setValue(pos);
 }
