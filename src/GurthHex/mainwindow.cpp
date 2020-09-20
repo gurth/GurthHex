@@ -20,7 +20,7 @@ MainWindow::MainWindow(QWidget *parent) :
         {
             HexShow hs;
             hs.TransShow(*this);
-            ConnectScrolls();
+            ConnectEditorWidgets();
         }
     }
 }
@@ -59,8 +59,6 @@ void inline MainWindow::OninitEditor()
 
     trans->setReadOnly(true);
     trans->verticalScrollBar()->hide();
-
-    highlighter = new Highlighter(editor->document());
 
     connect(dlgfind, SIGNAL(sendfinddata(QString)), this, SLOT(receivefinddata(QString)));
     connect(dlgreplace, SIGNAL(sendreplacedata(QString,QString,bool)), this, SLOT(receivereplacedata(QString,QString,bool)));
@@ -128,18 +126,25 @@ void MainWindow::receivereplacedata(QString target, QString replacewith, bool is
 }
 
 
-void MainWindow::ConnectScrolls()
+void MainWindow::ConnectEditorWidgets()
 {
+//Scrolls
     connect(editor->verticalScrollBar(),SIGNAL(valueChanged(int)),this,SLOT(OnEditorScrollMoved(int)));
     connect(line->verticalScrollBar(),SIGNAL(valueChanged(int)),this,SLOT(OnEditorScrollMoved(int)));
     connect(trans->verticalScrollBar(),SIGNAL(valueChanged(int)),this,SLOT(OnEditorScrollMoved(int)));
+//Cusor
+    connect(editor,SIGNAL(selectionChanged()),this,SLOT(OnEditorSelectionChanged()));
 }
 
-void MainWindow::DisconnectScrolls()
+void MainWindow::DisconnectEditorWidgets()
 {
+//Scrolls
     disconnect(connect(editor->verticalScrollBar(),SIGNAL(valueChanged(int)),this,SLOT(OnEditorScrollMoved(int))));
     disconnect(connect(line->verticalScrollBar(),SIGNAL(valueChanged(int)),this,SLOT(OnEditorScrollMoved(int))));
     disconnect(connect(trans->verticalScrollBar(),SIGNAL(valueChanged(int)),this,SLOT(OnEditorScrollMoved(int))));
+//Cusor
+    disconnect(connect(editor,SIGNAL(selectionChanged()),this,SLOT(OnEditorSelectionChanged())));
+
 }
 
 void MainWindow::OnEditorScrollMoved(int pos)
@@ -147,4 +152,59 @@ void MainWindow::OnEditorScrollMoved(int pos)
     editor->verticalScrollBar()->setValue(pos);
     line->verticalScrollBar()->setValue(pos);
     trans->verticalScrollBar()->setValue(pos);
+}
+
+void MainWindow::OnEditorSelectionChanged()
+{
+    QTextCursor cur_e=editor->textCursor();
+    QTextCursor cur_t=trans->textCursor();
+
+    BlockPos block_e,block_t;
+    block_e.pos.position=cur_e.position();
+    block_e.pos.row=block_e.pos.position/49;
+    block_e.pos.col=block_e.pos.position%49;
+    block_e.anchor.position=cur_e.anchor();
+    block_e.anchor.row=block_e.anchor.position/49;
+    block_e.anchor.col=block_e.anchor.position%49;
+
+    if(block_e.anchor.position==block_e.pos.position)
+    {
+        block_t.pos.row=block_e.pos.row;
+        block_t.pos.col=(block_e.pos.col-1)/3;
+        block_t.pos.position=block_t.pos.row*17+block_t.pos.col;
+
+        block_t.anchor.row=block_e.anchor.row;
+        block_t.anchor.col=(block_e.anchor.col-1)/3;
+        block_t.anchor.position=block_t.anchor.row*17+block_t.anchor.col;
+
+        cur_t.setPosition(block_t.pos.position,QTextCursor::MoveAnchor);
+        cur_t.setPosition(block_t.anchor.position+1,QTextCursor::KeepAnchor);
+    }
+    else if(block_e.anchor.position>block_e.pos.position)
+    {
+        block_t.pos.row=block_e.pos.row;
+        block_t.pos.col=block_e.pos.col/3;
+        block_t.pos.position=block_t.pos.row*17+block_t.pos.col;
+
+        block_t.anchor.row=block_e.anchor.row;
+        block_t.anchor.col=(block_e.anchor.col+1)/3;
+        block_t.anchor.position=block_t.anchor.row*17+block_t.anchor.col;
+
+        cur_t.setPosition(block_t.pos.position,QTextCursor::MoveAnchor);
+        cur_t.setPosition(block_t.anchor.position,QTextCursor::KeepAnchor);
+    }
+    else if(block_e.anchor.position<block_e.pos.position)
+    {
+        block_t.pos.row=block_e.pos.row;
+        block_t.pos.col=(block_e.pos.col+1)/3;
+        block_t.pos.position=block_t.pos.row*17+block_t.pos.col;
+
+        block_t.anchor.row=block_e.anchor.row;
+        block_t.anchor.col=block_e.anchor.col/3;
+        block_t.anchor.position=block_t.anchor.row*17+block_t.anchor.col;
+
+        cur_t.setPosition(block_t.pos.position,QTextCursor::MoveAnchor);
+        cur_t.setPosition(block_t.anchor.position,QTextCursor::KeepAnchor);
+    }
+    trans->setTextCursor(cur_t);
 }

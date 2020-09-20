@@ -3,7 +3,6 @@
 
 #include <QMainWindow>
 #include "fileprocess.h"
-#include "highlighter.h"
 #include "dlgfind.h"
 #include "dlgreplace.h"
 #include "dlgoption.h"
@@ -18,6 +17,19 @@ namespace Ui {
 class MainWindow;
 }
 
+struct CurPos
+{
+    int position;
+    int col;
+    int row;
+};
+
+struct BlockPos
+{
+    CurPos pos;
+    CurPos anchor;
+};
+
 class MainWindow : public QMainWindow
 {
     Q_OBJECT
@@ -25,8 +37,8 @@ class MainWindow : public QMainWindow
 public:
     explicit MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
-    void ConnectScrolls();
-    void DisconnectScrolls();
+    void ConnectEditorWidgets();
+    void DisconnectEditorWidgets();
 
 public slots:
     void OnClickFileNew();
@@ -46,6 +58,7 @@ public slots:
     void OnClickHelpAbout();
 
     void OnEditorScrollMoved(int pos);
+    void OnEditorSelectionChanged();
 
 private slots:
     void receivefinddata(QString finddata);
@@ -54,7 +67,6 @@ private slots:
 private:
     FileProcess process;
     Ui::MainWindow *ui;
-    Highlighter *highlighter;
     QTextEdit *editor;
     QTextEdit *line;
     QTextEdit *trans;

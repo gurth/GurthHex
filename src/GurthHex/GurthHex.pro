@@ -33,7 +33,6 @@ SOURCES += \
         hexdown.cpp \
         hexprocess.cpp \
         hexshow.cpp \
-        highlighter.cpp \
         main.cpp \
         mainwindow.cpp \
         meum.cpp
@@ -47,7 +46,6 @@ HEADERS += \
         hexdown.h \
         hexprocess.h \
         hexshow.h \
-        highlighter.h \
         mainwindow.h
 
 FORMS += \

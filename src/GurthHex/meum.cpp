@@ -18,11 +18,11 @@ void MainWindow::OnClickFileOpen()
         QMessageBox::information(nullptr, "Error", "File opening failed.", QMessageBox::Yes);
     else
     {
-        DisconnectScrolls();
+        DisconnectEditorWidgets();
         HexShow hs;
         if(!hs.TransShow(*this))
             QMessageBox::information(nullptr, "Error", "File Show failed.", QMessageBox::Yes);
-        ConnectScrolls();
+        ConnectEditorWidgets();
     }
 }
 
@@ -36,7 +36,7 @@ void MainWindow::OnClickFileSave()
         if(!process.filesaver())
             QMessageBox::information(nullptr, "Error", "File Save failed.", QMessageBox::Yes);
         else
-            QMessageBox::information(NULL, "Error", "File saving failed.", QMessageBox::Yes);
+            QMessageBox::information(nullptr, "Error", "File saving success.", QMessageBox::Yes);
     }
 
 }

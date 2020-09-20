@@ -1,6 +1,7 @@
 <!DOCTYPE RCC>
 <RCC version="1.0">
     <qresource>
+        <file>res/GurthHex.png</file>
         <file>res/GurthHex.ico</file>
     </qresource>
 </RCC>
